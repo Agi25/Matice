@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+	
+typedef struct{
+	unsigned int rows;
+	unsigned int cols;
+	float *elem;
+}MAT;	
+ 
+ char mat_create_random_permutation(MAT *mat){
+ 	int i;
+ 	int n=mat->rows;
+ 	float *perm = (float*)malloc(sizeof(float)*mat->rows);
+ 	for(i=0;i<n;i++){
+ 		perm[i]=i;
+ 		permutacia(perm,n);
+	 }
+	 
+ }
+	
+ void swap(int *a,int *b ){
+ 	int x;
+ 	x=*a;
+ 	*a=*b;
+ 	*b=x;
+ }
+	
+ void permutacia(int *arr,int size){
+ 	int i,s;
+ 	srand(time(NULL));
+ 	for(i=0;i<size-i;i++){
+ 		s=i+rand()%(size-1-i);
+ 		swap(arr+i,arr+s);
+	 }
+ }
+ 
+ int main(void){
+
+ int mat[3][3],i,j;
+
+ for(i=0;i<3;i++) { 
+    	for(j=0;j<3;j++)  
+    	{  
+      	mat[i][j]=0;
+      	printf("%d\t",mat[i][j]);
+    	}  
+    	printf("\n");  
+  	}  
+  	
+ 	return 0;
+}
