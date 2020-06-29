@@ -108,6 +108,14 @@ void mat_print(MAT *mat)
 MAT *mat_create_with_type(unsigned int rows,unsigned int cols)
 {
     MAT *mat=(MAT*)malloc(sizeof(MAT)*1);
+    
+    //v pripade neuspechu pamat sa uvolni
+    if(mat==NULL)
+	{
+        free(mat);
+        return NULL;
+    }
+    
     mat->rows=rows;
     mat->cols=cols;
     mat->elem=(float*)malloc(sizeof(float)*rows*cols);
@@ -118,6 +126,7 @@ MAT *mat_create_with_type(unsigned int rows,unsigned int cols)
         free(mat);
         return NULL;
     }
+    
     
     return mat;
 }
