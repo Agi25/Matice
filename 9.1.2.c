@@ -73,7 +73,7 @@ char mat_create_random_permutation(MAT *mat)
 	//zapis jednotiek podla permutacneho pola
     for(i=0;i<mat->rows;i++)
 	{
-        mat->elem[i*mat->cols+perm[i]]=1;
+        ELEM(mat,i,perm[i])=1;
     }
 
     return 'x';
