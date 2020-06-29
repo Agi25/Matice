@@ -32,7 +32,6 @@ void swap(int *a,int *b )
 void permutacia(int *arr,int size)
 {
  	int i,s;
- 	srand(time(NULL));
  	
  	for(i=0;i<size-i;i++)
 	 {
