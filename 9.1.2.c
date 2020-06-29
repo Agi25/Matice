@@ -45,9 +45,15 @@ char mat_create_random_permutation(MAT *mat)
 {
  	unsigned int i;
  	unsigned int n=mat->rows;
+ 	int *perm;
+ 	
+ 	if(mat->rows!=mat->cols)
+ 	{	
+ 		return 't';
+	}
  	
  	//allokacia pamate
-    int *perm = (int*)malloc(sizeof(int)*mat->rows);
+    perm = (int*)malloc(sizeof(int)*mat->rows);
     
     //vygenerovanie indexov stlpcov jednotiek
     for(i=0;i<n;i++)
@@ -70,7 +76,7 @@ char mat_create_random_permutation(MAT *mat)
         mat->elem[i*mat->cols+perm[i]]=1;
     }
 
-    return 0;
+    return 'x';
 }
 
 //vypis matice
