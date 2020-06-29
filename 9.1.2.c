@@ -167,17 +167,18 @@ MAT *mat_create_by_file(char *filename)
     
     //nacitanie prvkov matice
     matica=mat_create_with_type(dim[0],dim[1]);
-    matica->elem=(float*)malloc(dim[0]*dim[1]*sizeof(float));
     
 	readresult=read(fd,matica->elem,sizeof(float)*dim[0]*dim[1]);
     if (readresult==-1)
 	{
+		mat_destroy(matica);
         return NULL;
     }
     
     //bezpecne zatvorenie suboru
     if(close(fd)==-1)
 	{
+		mat_destroy(matica);
         return NULL;
 	}
        
