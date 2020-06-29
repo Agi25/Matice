@@ -131,6 +131,13 @@ MAT *mat_create_with_type(unsigned int rows,unsigned int cols)
     return mat;
 }
 
+//uvolnenie pamate
+void mat_destroy(MAT *mat)
+{
+	free(mat->elem);
+	free(mat);
+}
+
 //nacitanie matice zo suboru
 MAT *mat_create_by_file(char *filename)
 {
@@ -225,14 +232,6 @@ char mat_save(MAT *mat,char *filename)
 	}
 	return 'x';
 }
-
-//uvolnenie pamate
-void mat_destroy(MAT *mat)
-{
-	free(mat->elem);
-	free(mat);
-}
-
 
 //vytvorenie jednotkovej matice
 void mat_unit(MAT *mat)
