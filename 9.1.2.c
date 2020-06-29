@@ -255,10 +255,20 @@ void mat_random(MAT *mat)
 {
 	unsigned int i;
 	float random;
+	float znamienko = 1.0f;
 	for(i=0;i<mat->rows*mat->cols;i++)
 	{
-		random=(float)(rand()) / (float)(RAND_MAX)*(float)(pow(-1, (rand() % 2)));
-		mat->elem[i]=random;
+		if(rand()%2==0)
+		{
+			znamienko= -1.0f;
+		}
+		else
+		{
+			znamienko= 1.0f;
+		}
+		
+		random=(float)(rand()) / (float)(RAND_MAX);
+		mat->elem[i]=znamienko*random;
 	}
 }
 
