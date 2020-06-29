@@ -195,6 +195,7 @@ MAT *mat_create_by_file(char *filename)
 //ulozenie matice do suboru
 char mat_save(MAT *mat,char *filename)
 {
+	unsigned int dim[2];
 	int writeresult;
 	int fd=open(filename,O_BINARY|O_WRONLY|O_CREAT);
 	
@@ -203,7 +204,6 @@ char mat_save(MAT *mat,char *filename)
         return 't';
 	}
 
-	unsigned int dim[2];
 	dim[0]=mat->rows;
 	dim[1]=mat->cols;
 	
@@ -254,9 +254,10 @@ void mat_unit(MAT *mat)
 void mat_random(MAT *mat)
 {
 	unsigned int i;
+	float random;
 	for(i=0;i<mat->rows*mat->cols;i++)
 	{
-		float random=(float)(rand()) / (float)(RAND_MAX)*(float)(pow(-1, (rand() % 2)));
+		random=(float)(rand()) / (float)(RAND_MAX)*(float)(pow(-1, (rand() % 2)));
 		mat->elem[i]=random;
 	}
 }
@@ -265,6 +266,9 @@ int main(void)
 {
     //nastavenie nahodneho generatora
     srand(time(NULL));
+    
+    char filename[100] = { "matica.bin" };
+    MAT *m2;
 
     MAT *m = mat_create_with_type(5, 5);
 
@@ -280,11 +284,10 @@ int main(void)
 
     mat_print(m);
     printf("\n");
-    char filename[100] = { "matica.bin" };
     
     mat_save(m,filename);
     
-    MAT *m2 =mat_create_by_file(filename);
+    m2 =mat_create_by_file(filename);
     
     mat_print(m2);
     printf("\n");
