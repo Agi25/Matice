@@ -148,6 +148,12 @@ MAT *mat_create_by_file(char *filename)
     
     //citanie zo suboru
 	readresult=read(fd,type,sizeof(char)*2);
+	
+	if (type[0]!='M' && type[1]!= '1')
+	{
+        return NULL;
+    }
+	
     if (readresult==-1)
 	{
         return NULL;
