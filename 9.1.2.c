@@ -49,7 +49,7 @@ char mat_create_random_permutation(MAT *mat)
  	
  	if(mat->rows!=mat->cols)
  	{	
- 		return 't';
+ 		return 1;
 	}
  	
  	//allokacia pamate
@@ -75,8 +75,10 @@ char mat_create_random_permutation(MAT *mat)
 	{
         ELEM(mat,i,perm[i])=1;
     }
-
-    return 'x';
+    
+    free(perm);
+    
+    return 0;
 }
 
 //vypis matice
@@ -112,7 +114,6 @@ MAT *mat_create_with_type(unsigned int rows,unsigned int cols)
     //v pripade neuspechu pamat sa uvolni
     if(mat==NULL)
 	{
-        free(mat);
         return NULL;
     }
     
@@ -201,7 +202,7 @@ char mat_save(MAT *mat,char *filename)
 	
 	if(fd==-1)
 	{
-        return 't';
+        return 1;
 	}
 
 	dim[0]=mat->rows;
@@ -211,26 +212,26 @@ char mat_save(MAT *mat,char *filename)
 	writeresult=write(fd,"M1",sizeof(char)*2);
 	if(writeresult==-1)
 	{
-        return 't';
+        return 1;
 	}
 	
 	writeresult=write(fd,dim,sizeof(int)*2);
 	if(writeresult==-1)
 	{
-        return 't';
+        return 1;
 	}
 	
 	writeresult=write(fd,mat->elem,sizeof(float)*dim[0]*dim[1]);
 	if(writeresult==-1)
 	{
-        return 't';
+        return 1;
 	}
 	
 	if(close(fd)==-1)
 	{
-        return 't';
+        return 1;
 	}
-	return 'x';
+	return 0;
 }
 
 //vytvorenie jednotkovej matice
